@@ -80,12 +80,10 @@ function BBCode_NHL_LoadTheme()
 	$context['allowed_html_tags'][] = '<iframe>';
 }
 
-function BBCode_NHL_Embed(&$message)
+function BBCode_NHL_Embed(&$message, &$smileys, &$cache_id, &$parse_tags)
 {
-	$pattern = '#(|\[nhl(|.+?)\](([<br />]+)?))(http|https):\/\/video\.nhl\.com/videocenter/(console\?id=|embed?playlist=)(\d+)(([<br />]+)?)(\[/nhl\]|)#i';
-	$message = preg_replace($pattern, '[nhl$2]$5://video.nhl.com/videocenter/$6$7$8[/nhl]', $message);
-	$pattern = '#\[code(|(.+?))\](|.+?)\[nhl(|.+?)\](.+?)\[/nhl\](|.+?)\[/code\]#i';
-	$message = preg_replace($pattern, '[code$1]$3$5$6[/code]', $message);
+	$pattern = '~(?<=[\s>\.(;\'"]|^)(?:https?\:\/\/)video\.nhl\.com\/videocenter\/(console\?id=|embed?playlist=)(\d+)+\??[/\w\-_\~%@\?;=#}\\\\]?~';
+	$message = preg_replace($pattern, '[nhl]$0[/nhl]', $message);
 }
 
 ?>

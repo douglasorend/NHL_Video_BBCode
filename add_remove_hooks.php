@@ -25,6 +25,8 @@ $hook_functions = array(
 	'integrate_bbc_codes' => 'BBCode_NHL',
 	'integrate_bbc_buttons' => 'BBCode_NHL_Button',
 	'integrate_general_mod_settings' => 'BBCode_NHL_Settings',
+// SMF 2.1+ Hooks below this line:
+	'integrate_pre_parsebbc' => 'BBCode_NHL_Embed',
 );
 
 // Adding or removing them?
