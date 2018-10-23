@@ -12,11 +12,12 @@
 if (!defined('SMF')) 
 	die('Hacking attempt...');
 
-function BBCode_NHL_Preload()
+function BBCode_NHL_LoadTheme()
 {
 	global $context, $settings;
 	$context['html_headers'] .= '
 	<link rel="stylesheet" type="text/css" href="' . $settings['default_theme_url'] . '/css/BBCode-NHL.css" />';
+	$context['allowed_html_tags'][] = '<iframe>';
 }
 
 function BBCode_NHL(&$bbc)
@@ -62,7 +63,9 @@ function BBCode_NHL_Validate(&$tag, &$data, &$disabled)
 	list($width, $height) = explode('|', $tag['content']);
 	parse_str(parse_url(str_replace('&amp;', '&', $data), PHP_URL_QUERY), $out);
 	$data = (isset($out['id']) ? $out['id'] : (int) $data);
-	$tag['content'] = (empty($data) ? '' : '<div' . ((empty($width) && empty($height)) ? '' : ' style="max-width: ' . $width . 'px; max-height: ' . $height . 'px;"') . '><div class="nhl-wrapper"><iframe class="youtube-player" type="text/html" src="http://video.nhl.com/videocenter/embed?playlist=' . $data . '" allowfullscreen frameborder="0"></iframe></div></div>');
+	if (empty($data))
+		return ($tag['content'] = '');
+	$tag['content'] = '<div' . ((empty($width) && empty($height)) ? '' : ' style="max-width: ' . $width . 'px; max-height: ' . $height . 'px;"') . '><div class="nhl-wrapper"><iframe class="youtube-player" type="text/html" src="http://video.nhl.com/videocenter/embed?playlist=' . $data . '" allowfullscreen frameborder="0"></iframe></div></div>';
 }
 
 ?>

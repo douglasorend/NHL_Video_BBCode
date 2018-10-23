@@ -21,7 +21,7 @@ if (SMF == 'SSI')
 // Define the hooks
 $hook_functions = array(
 	'integrate_pre_include' => '$sourcedir/Subs-BBCode-NHL.php',
-	'integrate_load_theme' => 'BBCode_NHL_Theme',
+	'integrate_load_theme' => 'BBCode_NHL_LoadTheme',
 	'integrate_bbc_codes' => 'BBCode_NHL',
 	'integrate_bbc_buttons' => 'BBCode_NHL_Button',
 );

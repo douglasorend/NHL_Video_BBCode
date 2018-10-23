@@ -1,3 +1,8 @@
+v1.3 - August 8th, 2015
+o Fixed issue where CSS file was not being loaded.
+o Removed support for SMF 2.1 Beta 1
+o Added support for SMF 2.1 Beta 2
+
 v1.2 - July 18th, 2015
 o Added responsive video display elements to this mod.
 o When specifying width and height parameters, they are now treated as maximum display size.
