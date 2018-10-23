@@ -24,6 +24,7 @@ $hook_functions = array(
 	'integrate_load_theme' => 'BBCode_NHL_LoadTheme',
 	'integrate_bbc_codes' => 'BBCode_NHL',
 	'integrate_bbc_buttons' => 'BBCode_NHL_Button',
+	'integrate_general_mod_settings' => 'BBCode_NHL_Settings',
 );
 
 // Adding or removing them?

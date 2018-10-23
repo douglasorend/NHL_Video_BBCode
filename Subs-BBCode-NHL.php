@@ -12,6 +12,12 @@
 if (!defined('SMF')) 
 	die('Hacking attempt...');
 
+function BBCode_NHL_Settings(&$config_vars)
+{
+	$config_vars[] = array('int', 'nhl_default_width');
+	$config_vars[] = array('int', 'nhl_default_height');
+}
+
 function BBCode_NHL_LoadTheme()
 {
 	global $context, $settings;
@@ -28,10 +34,11 @@ function BBCode_NHL(&$bbc)
 		'type' => 'unparsed_content',
 		'parameters' => array(
 			'width' => array('match' => '(\d+)'),
-			'height' => array('match' => '(\d+)'),
+			'height' => array('optional' => true, 'match' => '(\d+)'),
+			'frameborder' => array('optional' => true, 'match' => '(\d+)'),
 		),
 		'validate' => 'BBCode_NHL_Validate',
-		'content' => '{width}|{height}',
+		'content' => '{width}|{height}|{frameborder}',
 		'disabled_content' => '$1',
 	);
 
@@ -40,7 +47,7 @@ function BBCode_NHL(&$bbc)
 		'tag' => 'nhl',
 		'type' => 'unparsed_content',
 		'validate' => 'BBCode_NHL_Validate',
-		'content' => '0|0',
+		'content' => '0|0|0',
 		'disabled_content' => '$1',
 	);
 }
@@ -58,14 +65,19 @@ function BBCode_NHL_Button(&$buttons)
 
 function BBCode_NHL_Validate(&$tag, &$data, &$disabled)
 {
+	global $modSettings;
+	
 	if (empty($data))
 		return ($tag['content'] = '');
-	list($width, $height) = explode('|', $tag['content']);
+	list($width, $height, $frameborder) = explode('|', $tag['content']);
+	if (empty($width) && !empty($modSettings['nhl_default_width']))
+		$width = $modSettings['nhl_default_width'];
+	if (empty($height) && !empty($modSettings['nhl_default_height']))
+		$height = $modSettings['nhl_default_height'];
 	parse_str(parse_url(str_replace('&amp;', '&', $data), PHP_URL_QUERY), $out);
 	$data = (isset($out['id']) ? $out['id'] : (int) $data);
-	if (empty($data))
-		return ($tag['content'] = '');
-	$tag['content'] = '<div' . ((empty($width) && empty($height)) ? '' : ' style="max-width: ' . $width . 'px; max-height: ' . $height . 'px;"') . '><div class="nhl-wrapper"><iframe class="youtube-player" type="text/html" src="http://video.nhl.com/videocenter/embed?playlist=' . $data . '" allowfullscreen frameborder="0"></iframe></div></div>';
+	$tag['content'] = (empty($data) ? '' : '<div' . (empty($width) || empty($height) ? '' : ' style="max-width: ' . $width . 'px; max-height: ' . $height . 'px;') . '"><div class="nhl-wrapper">' .
+		'<iframe class="NHL-player" type="text/html" src="http://video.nhl.com/videocenter/embed?playlist=' . $data . '" allowfullscreen frameborder="' . $frameborder . '"></iframe></div></div>');
 }
 
 ?>
