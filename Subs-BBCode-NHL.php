@@ -82,8 +82,11 @@ function BBCode_NHL_LoadTheme()
 
 function BBCode_NHL_Embed(&$message, &$smileys, &$cache_id, &$parse_tags)
 {
+	$replace = (strpos($cache_id, 'sig') !== false ? '[url]$0[/url]' : '[nhl]$0[/nhl]');
 	$pattern = '~(?<=[\s>\.(;\'"]|^)(?:https?\:\/\/)video\.nhl\.com\/videocenter\/(console\?id=|embed?playlist=)(\d+)+\??[/\w\-_\~%@\?;=#}\\\\]?~';
-	$message = preg_replace($pattern, '[nhl]$0[/nhl]', $message);
+	$message = preg_replace($pattern, $replace, $message);
+	if (strpos($cache_id, 'sig') !== false)
+		$message = preg_replace('#\[nhl.*\](.*)\[\/nhl\]#i', '[url]$1[/url]', $message);
 }
 
 ?>
