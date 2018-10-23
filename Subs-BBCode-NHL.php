@@ -12,20 +12,6 @@
 if (!defined('SMF')) 
 	die('Hacking attempt...');
 
-function BBCode_NHL_Settings(&$config_vars)
-{
-	$config_vars[] = array('int', 'nhl_default_width');
-	$config_vars[] = array('int', 'nhl_default_height');
-}
-
-function BBCode_NHL_LoadTheme()
-{
-	global $context, $settings;
-	$context['html_headers'] .= '
-	<link rel="stylesheet" type="text/css" href="' . $settings['default_theme_url'] . '/css/BBCode-NHL.css" />';
-	$context['allowed_html_tags'][] = '<iframe>';
-}
-
 function BBCode_NHL(&$bbc)
 {
 	// Format: [nhl width=x height=x]{playlist ID}[/nhl]
@@ -65,7 +51,7 @@ function BBCode_NHL_Button(&$buttons)
 
 function BBCode_NHL_Validate(&$tag, &$data, &$disabled)
 {
-	global $modSettings;
+	global $modSettings, $txt;
 	
 	if (empty($data))
 		return ($tag['content'] = '');
@@ -74,10 +60,32 @@ function BBCode_NHL_Validate(&$tag, &$data, &$disabled)
 		$width = $modSettings['nhl_default_width'];
 	if (empty($height) && !empty($modSettings['nhl_default_height']))
 		$height = $modSettings['nhl_default_height'];
-	parse_str(parse_url(str_replace('&amp;', '&', $data), PHP_URL_QUERY), $out);
-	$data = (isset($out['id']) ? $out['id'] : (int) $data);
+	preg_match('#(http|https):\/\/video\.nhl\.com/videocenter/(console\?id=|embed?playlist=)(\d+)#i', $data, $parts);
+	$data = (isset($parts[3]) ? $parts[3] : (int) $data);
 	$tag['content'] = (empty($data) ? '' : '<div' . (empty($width) || empty($height) ? '' : ' style="max-width: ' . $width . 'px; max-height: ' . $height . 'px;') . '"><div class="nhl-wrapper">' .
 		'<iframe class="NHL-player" type="text/html" src="http://video.nhl.com/videocenter/embed?playlist=' . $data . '" allowfullscreen frameborder="' . $frameborder . '"></iframe></div></div>');
+}
+
+function BBCode_NHL_Settings(&$config_vars)
+{
+	$config_vars[] = array('int', 'nhl_default_width');
+	$config_vars[] = array('int', 'nhl_default_height');
+}
+
+function BBCode_NHL_LoadTheme()
+{
+	global $context, $settings;
+	$context['html_headers'] .= '
+	<link rel="stylesheet" type="text/css" href="' . $settings['default_theme_url'] . '/css/BBCode-NHL.css" />';
+	$context['allowed_html_tags'][] = '<iframe>';
+}
+
+function BBCode_NHL_Embed(&$message)
+{
+	$pattern = '#(|\[nhl(|.+?)\](([<br />]+)?))(http|https):\/\/video\.nhl\.com/videocenter/(console\?id=|embed?playlist=)(\d+)(([<br />]+)?)(\[/nhl\]|)#i';
+	$message = preg_replace($pattern, '[nhl$2]$5://video.nhl.com/videocenter/$6$7$8[/nhl]', $message);
+	$pattern = '#\[code(|(.+?))\](|.+?)\[nhl(|.+?)\](.+?)\[/nhl\](|.+?)\[/code\]#i';
+	$message = preg_replace($pattern, '[code$1]$3$5$6[/code]', $message);
 }
 
 ?>

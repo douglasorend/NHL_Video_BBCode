@@ -1,16 +1,17 @@
 <?xml version="1.0"?>
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
-<id>Dougiefresh:NHL</id>
-<name>Embed NHL BBCode</name>
-<version>1.4</version>
+<id>Dougiefresh:NHL bbcode</id>
+<name>Embed NHL bbcode BBCode</name>
+<version>1.5</version>
 	
-<file name="$languagedir/ManageSettings.english.php">
+<file name="$languagedir/index.english.php">
 	<operation>
 		<search position="end" />
 		<add><![CDATA[
-$txt['sportsnet_default_width'] = 'Default width used for SportsNet bbcode when not specified<div class="smalltext">Use <strong>0</strong> to use responsive video display.  Must set both.</div>';
-$txt['sportsnet_default_height'] = 'Default height used for SportsNet bbcode when not specified<div class="smalltext">Use <strong>0</strong> to use responsive video display.  Must set both.</div>';
+$txt['nhl_default_width'] = 'Default width used for NHL bbcode bbcode when not specified<div class="smalltext">Use <strong>0</strong> to use responsive video display.  Must set both.</div>';
+$txt['nhl_default_height'] = 'Default height used for NHL bbcode bbcode when not specified<div class="smalltext">Use <strong>0</strong> to use responsive video display.  Must set both.</div>';
+$txt['nhl_invalid'] = '[ Invalid NHL URL ]';
 ]]></add>
 	</operation>
 </file>

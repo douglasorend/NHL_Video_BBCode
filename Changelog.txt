@@ -1,3 +1,10 @@
+v1.5 - October 2nd, 2015
+o Modified validation function to check to make sure URL is actually a NHL video URL.
+o Added string to indicate invalid NHL URL was used when (duh) invalid NHL URL is used.
+o Added code to auto-embed links to NHL videos automatically.
+o Added code to remove auto-embedded NHL videos from within code tags.
+o Fixed language strings so that the text shows up under Modification Settings area.
+
 v1.4 - August 12th, 2015
 o Added settings to allow admin to set default size of the YouTube video.
 o Altered code to use new default size settings when width and/or height isn't specified.
