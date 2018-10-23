@@ -63,7 +63,7 @@ function BBCode_NHL_Validate(&$tag, &$data, &$disabled)
 	preg_match('#(http|https):\/\/video\.nhl\.com/videocenter/(console\?id=|embed?playlist=)(\d+)#i', $data, $parts);
 	$data = (isset($parts[3]) ? $parts[3] : (int) $data);
 	$tag['content'] = (empty($data) ? '' : '<div' . (empty($width) || empty($height) ? '' : ' style="max-width: ' . $width . 'px; max-height: ' . $height . 'px;') . '"><div class="nhl-wrapper">' .
-		'<iframe class="NHL-player" type="text/html" src="http://video.nhl.com/videocenter/embed?playlist=' . $data . '" allowfullscreen frameborder="' . $frameborder . '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div>');
+		'<iframe class="NHL-player" type="text/html" src="http://video.nhl.com/videocenter/embed?playlist=' . $data . '" allowfullscreen frameborder="' . $frameborder . '"></iframe></div></div>');
 }
 
 function BBCode_NHL_Settings(&$config_vars)
