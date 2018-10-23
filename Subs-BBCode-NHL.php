@@ -82,6 +82,8 @@ function BBCode_NHL_LoadTheme()
 
 function BBCode_NHL_Embed(&$message, &$smileys, &$cache_id, &$parse_tags)
 {
+	if ($message === false)
+		return;
 	$replace = (strpos($cache_id, 'sig') !== false ? '[url]$0[/url]' : '[nhl]$0[/nhl]');
 	$pattern = '~(?<=[\s>\.(;\'"]|^)(?:https?\:\/\/)video\.nhl\.com\/videocenter\/(console\?id=|embed?playlist=)(\d+)+\??[/\w\-_\~%@\?;=#}\\\\]?~';
 	$message = preg_replace($pattern, $replace, $message);
