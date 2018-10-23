@@ -15,7 +15,7 @@ The two BBCodes takes these forms:
 where [b]{NHL video URL}[/b] is the NHL video URL and the [b]width[/b] and [b]height[/b] parameters being optional.  If the width and height aren't specified, the video is displayed at 100% of the display post.  Please note that width and height specify the maximum size that the video may take up on the screen.
 
 [color=blue][b][size=12pt][u]Admin Settings[/u][/size][/b][/color]
-There are no admin settings to this mod.  To disable, you must uninstall this mod.
+The default width and height parameters can be specified in the [b]Admin[/b] -> [b]Configuration[/b] -> [b]Modification Settings[/b] area.
 
 [color=blue][b][size=12pt][u]Compatibility Notes[/u][/size][/b][/color]
 This mod was tested on SMF 2.0.9, but should work on SMF 2.1 Beta 2, as well as SMF 2.0 and up.  SMF 1.x is not and will not be supported.

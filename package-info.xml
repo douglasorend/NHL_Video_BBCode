@@ -10,7 +10,7 @@
 	<install for="2.0 - 2.0.99">
 		<readme parsebbc="true">readme.txt</readme>
 		<code>add_remove_hooks.php</code>
-		<modification>install.xml</modification>
+		<modification>install_20x.xml</modification>
 		<modification>language_english.xml</modification>
 		<require-file name="Subs-BBCode-NHL.php" destination="$sourcedir" />
 		<require-file name="BBCode-NHL.css" destination="$themedir/css" />
@@ -18,7 +18,7 @@
 	</install>
 	<uninstall for="2.0 - 2.0.99">
 		<code>add_remove_hooks.php</code>
-		<modification reverse="true">install.xml</modification>
+		<modification reverse="true">install_20x.xml</modification>
 		<modification reverse="true">language_english.xml</modification>
 		<remove-file name="$sourcedir/Subs-BBCode-NHL.php" />		
 		<remove-file name="$themedir/css/BBCode-NHL.css" />
@@ -28,6 +28,7 @@
 	<install for="2.1 Beta 2">
 		<readme parsebbc="true">readme.txt</readme>
 		<code>add_remove_hooks.php</code>
+		<modification>install_21x.xml</modification>
 		<modification>language_english.xml</modification>
 		<require-file name="Subs-BBCode-NHL.php" destination="$sourcedir" />
 		<require-file name="BBCode-NHL.css" destination="$themedir/css" />
@@ -35,6 +36,7 @@
 	</install>
 	<uninstall for="2.1 Beta 2">
 		<code>add_remove_hooks.php</code>
+		<modification reverse="true">install_21x.xml</modification>
 		<modification reverse="true">language_english.xml</modification>
 		<remove-file name="$sourcedir/Subs-BBCode-NHL.php" />		
 		<remove-file name="$themedir/css/BBCode-NHL.css" />

@@ -1,3 +1,6 @@
+v1.6 - October 3rd, 2015
+o SMF 2.1: Fixed installer so that auto-embed is added without producing error.
+
 v1.5 - October 2nd, 2015
 o Modified validation function to check to make sure URL is actually a NHL video URL.
 o Added string to indicate invalid NHL URL was used when (duh) invalid NHL URL is used.
